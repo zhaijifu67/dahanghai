@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>大航海物语工具箱</title>
+		<script src="../index/js/main.js"></script>
+		<!-- 大航海相关js -->
+		<script src="data/pet.js?v=20231111"></script>
+		<script src="data/egg.js?v=20230919"></script>
+		<script src="data/job.js?v=20230913"></script>
+		<script src="data/skill.js?v=20230913"></script>
+		<script src="data/recruit.js?v=20230907-3"></script>
+		<script src="data/idle.js?v=20230915"></script>
+		<script src="data/area.js?v=20230913-5"></script>
+		<script src="data/maze.js"></script>
+		<script src="data/decompose.js?v=202309010"></script>
+		<script src="data/equip.js?v=20230919"></script>
+		<script src="data/shop.js?v=20230923"></script>
+		<script src="data/room.js"></script>
+		<script src="data/building.js?v=20230913"></script>
+		<link rel="stylesheet" href="css/style.css?v=20230923">
+		<link rel="stylesheet" href="css/pet.css?v=20230907-6">
+		<link rel="stylesheet" href="css/egg.css?v=20230913-5">
+		<link rel="stylesheet" href="css/job.css?v=20230907-4">
+		<link rel="stylesheet" href="css/maze.css">
+		<link rel="stylesheet" href="css/idle.css?v=20230910">
+		<link rel="stylesheet" href="css/room.css">
+		<script src="js/main.js?v=20230924"></script>
+		<script src="js/important.js?v=20230919"></script>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+			integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous">
+		</script>
+		<script>
+			window.onload = function() {
+				// 删除图片
+				var dataImage = {}
+				loadPetData();
+				var set = localStorage.getItem("set");
+				if (set != null && set != undefined) {
+					loadEggTable(set);
+				} else {
+					loadEggTable("");
+				}
+				loadPeopleTable();
+				loadEggList();
+				loadJobTable();
+				loadSkillTable();
+				loadActivity();
+				loadRecruitTable();
+				loadAreaTable();
+				loadIdleTable();
+				loadMazeTable();
+				loadDecomposeTable();
+				loadEquipTable();
+				loadShopTable();
+				loadRoomTable();
+			}
+
+			function navClick(e) {
+				document.getElementById('navbarSupportedContent').classList.remove('show');
+				for (let child of document.getElementById('navbarSupportedContent').children[0].children) {
+					child.children[0].classList.remove('active');
+				}
+				e.classList.add('active');
+			}
+		</script>
+		<style>
+			.bg-purple {
+				background-color: purple;
+			}
+		</style>
+	<body data-bs-theme="dark">
+		<nav class="navbar navbar-expand-lg bg-body sticky-top">
+			<div class="container-xxl">
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link" href="#activity" onclick="navClick(this);">活动</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#fuhua" onclick="navClick(this);">孵化计算器</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#people" onclick="navClick(this);">势力</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#pet" onclick="navClick(this);">宠物数据</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#egg" onclick="navClick(this);">蛋色素</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#equip" onclick="navClick(this);">装备</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#job" onclick="navClick(this);">职业</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#recruit" onclick="navClick(this);">招募</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#skill" onclick="navClick(this);">技能</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#area" onclick="navClick(this);">地区</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#idle" onclick="navClick(this);">巡游</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#maze" onclick="navClick(this);">迷宫</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#decompose" onclick="navClick(this);">物品</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#shop" onclick="navClick(this);">商店</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#room" onclick="navClick(this);">房间</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div class="container-xxl mt-3">
+			<div id="tipsClick" class="card bg-body-tertiary p-2"></div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="activity">
+				<div class="card-title">今日活动</div>
+				<div id="activityContent" class="row"></div>
+			</div>
+
+			<div class="p-2 card bg-body-tertiary mb-3" id="fuhua">
+				<div class="card-title">孵化计算</div>
+				<div class="row">
+					<div class="col-12 col-md-6 col-xxl-4">
+						<div class="input-group mb-3">
+							<span class="input-group-text">孵化目标</span>
+							<input type="text" class="form-control" placeholder="请选择" list="petList" id="incubate"
+								aria-label="孵化目标" onchange="changeIncubate()">
+						</div>
+						<div class="form-text mb-1 mt-3">蛋基础属性</div>
+						<div class="input-group mb-2">
+							<span class="input-group-text">蛋星级</span>
+							<select class="form-select" id="eggStar" onchange="changeSelect(event);changeEggStar();">
+								<option value="1" selected>★☆☆☆☆，5种材料，属性上限100</option>
+								<option value="2">★★☆☆☆，6种材料，属性上限200</option>
+								<option value="3">★★★☆☆，7种材料，属性上限300</option>
+								<option value="4">★★★★☆，8种材料，属性上限400</option>
+								<option value="5">★★★★★，9种材料，属性上限500</option>
+								<option value="6">双六特殊蛋，12种材料，属性上限500</option>
+							</select>
+						</div>
+						<div class="row">
+							<div class="col-6">
+								<div class="input-group mb-2">
+									<span class="input-group-text bg-success">绿</span>
+									<input type="number" class="form-control" placeholder="色素值" value="0"
+										onchange="changeEggSelect()" id="eggGreen" aria-label="绿">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="input-group mb-2">
+									<span class="input-group-text bg-danger">红</span>
+									<input type="number" class="form-control" placeholder="色素值" value="0"
+										onchange="changeEggSelect()" id="eggRed" aria-label="红">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="input-group mb-2">
+									<span class="input-group-text bg-info">蓝</span>
+									<input type="number" class="form-control" placeholder="色素值" value="0"
+										onchange="changeEggSelect()" id="eggBlue" aria-label="蓝">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="input-group mb-2">
+									<span class="input-group-text bg-purple">紫</span>
+									<input type="number" class="form-control" placeholder="色素值" value="0"
+										onchange="changeEggSelect()" id="eggPurple" aria-label="紫">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="input-group mb-2">
+									<span class="input-group-text bg-warning">黄</span>
+									<input type="number" class="form-control" placeholder="色素值" value="0"
+										onchange="changeEggSelect()" id="eggYellow" aria-label="黄">
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="input-group mb-2">
+									<span class="input-group-text bg-dark">黑</span>
+									<input type="number" class="form-control" placeholder="色素值" value="0"
+										onchange="changeEggSelect()" id="eggBlack" aria-label="黑">
+								</div>
+							</div>
+						</div>
+						<hr />
+						<div class="form-text mb-1 mt-3">自动计算</div>
+						<div class="input-group">
+							<span class="input-group-text">结果次数</span>
+							<input type="number" class="form-control" id="countTimesMax" value="99"
+								aria-describedby="basic-addon3 basic-addon4">
+							<button class="btn btn-red form-control" onclick="countIncubate()">开始计算</button>
+						</div>
+						<div class="form-text text-danger">次数过大可能会导致浏览器卡死</div>
+						<div class="form-text">默认只计算食物和蛋素材，修改请到<a class="link"
+								onclick="aScroll('eggData')">蛋孵化色素数据</a>修改</div>
+						<hr />
+						<div class="form-text mb-1 mt-3">自助材料选择</div>
+						<div class="row">
+							<div class="col-6 mb-2">
+								<input type="text" class="form-control" id="selectEgg1" onchange="changeEggSelect()"
+									aria-label="材料选择">
+							</div>
+							<div class="col-6 mb-2">
+								<input type="text" class="form-control" id="selectEgg2" onchange="changeEggSelect()"
+									aria-label="材料选择">
+							</div>
+							<div class="col-6 mb-2">
+								<input type="text" class="form-control" id="selectEgg3" onchange="changeEggSelect()"
+									aria-label="材料选择">
+							</div>
+							<div class="col-6 mb-2">
+								<input type="text" class="form-control" id="selectEgg4" onchange="changeEggSelect()"
+									aria-label="材料选择">
+							</div>
+							<div class="col-6 mb-2">
+								<input type="text" class="form-control" id="selectEgg5" onchange="changeEggSelect()"
+									aria-label="材料选择">
+							</div>
+							<div class="col-6 mb-2">
+								<input type="text" class="form-control" id="selectEgg6" disabled
+									onchange="changeEggSelect()" aria-label="材料选择">
+							</div>
+							<div class="col-6 mb-2">
+								<input type="text" class="form-control" id="selectEgg7" disabled
+									onchange="changeEggSelect()" aria-label="材料选择">
+							</div>
+							<div class="col-6 mb-2">
+								<input type="text" class="form-control" id="selectEgg8" disabled
+									onchange="changeEggSelect()" aria-label="材料选择">
+							</div>
+							<div class="col-6 mb-2">
+								<input type="text" class="form-control" id="selectEgg9" disabled
+									onchange="changeEggSelect()" aria-label="材料选择">
+							</div>
+							<div class="col-6 mb-2">
+								<input type="text" class="form-control" id="selectEgg10" disabled
+									onchange="changeEggSelect()" aria-label="材料选择">
+							</div>
+							<div class="col-6 mb-2">
+								<input type="text" class="form-control" id="selectEgg11" disabled
+									onchange="changeEggSelect()" aria-label="材料选择">
+							</div>
+							<div class="col-6 mb-2">
+								<input type="text" class="form-control" id="selectEgg12" disabled
+									onchange="changeEggSelect()" aria-label="材料选择">
+							</div>
+						</div>
+						<datalist id="eggList"></datalist>
+						<datalist id="petList"></datalist>
+					</div>
+					<div class="col-12 col-md-6 col-xxl-8">
+						<div class="overflow-auto text-nowrap mb-4 item-max-height">
+							<table class="table m-0 text-center">
+								<tbody id="incubateTable">
+								</tbody>
+							</table>
+						</div>
+						<div id="PetEligible" class="bg-success small"></div>
+						<div class="overflow-auto text-nowrap mb-4 item-max-height">
+							<table class="table m-0 text-center">
+								<tbody id="eggIncubateTable">
+								</tbody>
+							</table>
+						</div>
+						<div class="overflow-auto text-nowrap item-max-height">
+							<table class="table m-0 text-center">
+								<tbody id="countTable">
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="people">
+				<div class="card-title">势力计算器</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="peopleDataTable">
+						</tbody>
+					</table>
+				</div>
+				<datalist id="buildingList"></datalist>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="pet">
+				<div class="card-title">宠物数据</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="petDataTable">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="eggData">
+				<div class="card-title">蛋孵化色素数据</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="eggDataTable">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="equip">
+				<div class="card-title">装备数据</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="equipDataTable">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="job">
+				<div class="card-title">职业数据</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="jobDataTable">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="recruit">
+				<div class="card-title">酒馆招募</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="recruitDataTable">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="skill">
+				<div class="card-title">技能数据</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="skillDataTable">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="area">
+				<div class="card-title">地区数据</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="areaDataTable">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="idle">
+				<div class="card-title">巡游数据</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="idleDataTable">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="maze">
+				<div class="card-title">迷宫数据</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="mazeDataTable">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="decompose">
+				<div class="card-title">物品解析数据</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="decomposeDataTable">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="shop">
+				<div class="card-title">商店出售数据</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="shopDataTable">
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="p-2 card bg-body-tertiary mb-3" id="room">
+				<div class="card-title">房间数据</div>
+				<div class="overflow-auto text-nowrap item-max-height">
+					<table class="table m-0 text-center">
+						<tbody id="roomDataTable">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
