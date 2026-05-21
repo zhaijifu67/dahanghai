@@ -71,9 +71,13 @@
 			.bg-purple {
 				background-color: purple;
 			}
+
+			.item-max-height {
+				max-height: 400px;
+			}
 		</style>
-	<body data-bs-theme="dark">
-		<nav class="navbar navbar-expand-lg bg-body sticky-top">
+	<body>
+		<nav class="navbar navbar-expand-lg bg-body-secondary sticky-top">
 			<div class="container-xxl">
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -131,16 +135,16 @@
 				</div>
 			</div>
 		</nav>
-		<div class="container-xxl mt-3">
+		<div class="container-xxl my-3">
+			<h1 class="m5-3 fw-semibold">宅爷的大航海冒险工具箱</h1>
 			<div id="tipsClick" class="card bg-body-tertiary p-2"></div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="activity">
-				<div class="card-title">今日活动</div>
-				<div id="activityContent" class="row"></div>
+			<h3 id="activity">🎉 今日活动</h3>
+			<div class="card bg-body-tertiary mb-3">
+				<div id="activityContent" class="row card-body"></div>
 			</div>
-
-			<div class="p-2 card bg-body-tertiary mb-3" id="fuhua">
-				<div class="card-title">孵化计算</div>
-				<div class="row">
+			<h3 id="fuhua">🥚 孵化计算</h3>
+			<div class="card bg-body-tertiary mb-3">
+				<div class="row card-body">
 					<div class="col-12 col-md-6 col-xxl-4">
 						<div class="input-group mb-3">
 							<span class="input-group-text">孵化目标</span>
@@ -162,42 +166,42 @@
 						<div class="row">
 							<div class="col-6">
 								<div class="input-group mb-2">
-									<span class="input-group-text bg-success">绿</span>
+									<span class="input-group-text text-light bg-success">绿</span>
 									<input type="number" class="form-control" placeholder="色素值" value="0"
 										onchange="changeEggSelect()" id="eggGreen" aria-label="绿">
 								</div>
 							</div>
 							<div class="col-6">
 								<div class="input-group mb-2">
-									<span class="input-group-text bg-danger">红</span>
+									<span class="input-group-text text-light bg-danger">红</span>
 									<input type="number" class="form-control" placeholder="色素值" value="0"
 										onchange="changeEggSelect()" id="eggRed" aria-label="红">
 								</div>
 							</div>
 							<div class="col-6">
 								<div class="input-group mb-2">
-									<span class="input-group-text bg-info">蓝</span>
+									<span class="input-group-text text-light bg-info">蓝</span>
 									<input type="number" class="form-control" placeholder="色素值" value="0"
 										onchange="changeEggSelect()" id="eggBlue" aria-label="蓝">
 								</div>
 							</div>
 							<div class="col-6">
 								<div class="input-group mb-2">
-									<span class="input-group-text bg-purple">紫</span>
+									<span class="input-group-text text-light bg-purple">紫</span>
 									<input type="number" class="form-control" placeholder="色素值" value="0"
 										onchange="changeEggSelect()" id="eggPurple" aria-label="紫">
 								</div>
 							</div>
 							<div class="col-6">
 								<div class="input-group mb-2">
-									<span class="input-group-text bg-warning">黄</span>
+									<span class="input-group-text text-light bg-warning">黄</span>
 									<input type="number" class="form-control" placeholder="色素值" value="0"
 										onchange="changeEggSelect()" id="eggYellow" aria-label="黄">
 								</div>
 							</div>
 							<div class="col-6">
 								<div class="input-group mb-2">
-									<span class="input-group-text bg-dark">黑</span>
+									<span class="input-group-text text-light bg-dark">黑</span>
 									<input type="number" class="form-control" placeholder="色素值" value="0"
 										onchange="changeEggSelect()" id="eggBlack" aria-label="黑">
 								</div>
@@ -209,7 +213,7 @@
 							<span class="input-group-text">结果次数</span>
 							<input type="number" class="form-control" id="countTimesMax" value="99"
 								aria-describedby="basic-addon3 basic-addon4">
-							<button class="btn btn-red form-control" onclick="countIncubate()">开始计算</button>
+							<button class="btn btn-primary form-control" onclick="countIncubate()">开始计算</button>
 						</div>
 						<div class="form-text text-danger">次数过大可能会导致浏览器卡死</div>
 						<div class="form-text">默认只计算食物和蛋素材，修改请到<a class="link"
@@ -271,20 +275,20 @@
 					</div>
 					<div class="col-12 col-md-6 col-xxl-8">
 						<div class="overflow-auto text-nowrap mb-4 item-max-height">
-							<table class="table m-0 text-center">
+							<table class="table  table-striped table-hover m-0 text-center">
 								<tbody id="incubateTable">
 								</tbody>
 							</table>
 						</div>
 						<div id="PetEligible" class="bg-success small"></div>
 						<div class="overflow-auto text-nowrap mb-4 item-max-height">
-							<table class="table m-0 text-center">
+							<table class="table  table-striped table-hover m-0 text-center">
 								<tbody id="eggIncubateTable">
 								</tbody>
 							</table>
 						</div>
-						<div class="overflow-auto text-nowrap item-max-height">
-							<table class="table m-0 text-center">
+						<div class="overflow-auto text-nowrap item-max-height rounded">
+							<table class="table  table-striped table-hover m-0 text-center">
 								<tbody id="countTable">
 								</tbody>
 							</table>
@@ -292,124 +296,124 @@
 					</div>
 				</div>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="people">
-				<div class="card-title">势力计算器</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="peopleDataTable">
-						</tbody>
-					</table>
-				</div>
-				<datalist id="buildingList"></datalist>
+			<h3 id="people">👪 势力计算器</h3>
+			<div class="card bg-body-tertiary mb-3"">
+				<div class=" overflow-auto text-nowrap item-max-height rounded rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="peopleDataTable">
+					</tbody>
+				</table>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="pet">
-				<div class="card-title">宠物数据</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="petDataTable">
-						</tbody>
-					</table>
-				</div>
+			<datalist id="buildingList"></datalist>
+		</div>
+		<h3 id="pet">🐶 宠物数据</h3>
+		<div class="card bg-body-tertiary mb-3">
+			<div class="overflow-auto text-nowrap item-max-height rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="petDataTable">
+					</tbody>
+				</table>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="eggData">
-				<div class="card-title">蛋孵化色素数据</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="eggDataTable">
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<h3 id="egg">🎨 蛋孵化色素数据</h3>
+		<div class="card bg-body-tertiary mb-3">
+			<div class="overflow-auto text-nowrap item-max-height rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="eggDataTable">
+					</tbody>
+				</table>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="equip">
-				<div class="card-title">装备数据</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="equipDataTable">
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<h3 id="equip">🛡️ 装备数据</h3>
+		<div class="card bg-body-tertiary mb-3">
+			<div class="overflow-auto text-nowrap item-max-height rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="equipDataTable">
+					</tbody>
+				</table>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="job">
-				<div class="card-title">职业数据</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="jobDataTable">
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<h3 id="job">👩‍⚕️️ 职业数据</h3>
+		<div class="card bg-body-tertiary mb-3">
+			<div class="overflow-auto text-nowrap item-max-height rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="jobDataTable">
+					</tbody>
+				</table>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="recruit">
-				<div class="card-title">酒馆招募</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="recruitDataTable">
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<h3 id="recruit">🍺️️ 酒馆招募</h3>
+		<div class="card bg-body-tertiary mb-3">
+			<div class="overflow-auto text-nowrap item-max-height rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="recruitDataTable">
+					</tbody>
+				</table>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="skill">
-				<div class="card-title">技能数据</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="skillDataTable">
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<h3 id="skill">⚔️️️ 技能数据</h3>
+		<div class="card bg-body-tertiary mb-3">
+			<div class="overflow-auto text-nowrap item-max-height rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="skillDataTable">
+					</tbody>
+				</table>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="area">
-				<div class="card-title">地区数据</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="areaDataTable">
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<h3 id="area">🗺️️️️ 地区数据</h3>
+		<div class="card bg-body-tertiary mb-3">
+			<div class="overflow-auto text-nowrap item-max-height rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="areaDataTable">
+					</tbody>
+				</table>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="idle">
-				<div class="card-title">巡游数据</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="idleDataTable">
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<h3 id="idle">⛵️️ 巡游数据</h3>
+		<div class="card bg-body-tertiary mb-3">
+			<div class="overflow-auto text-nowrap item-max-height rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="idleDataTable">
+					</tbody>
+				</table>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="maze">
-				<div class="card-title">迷宫数据</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="mazeDataTable">
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<h3 id="maze">🏰 迷宫数据</h3>
+		<div class="card bg-body-tertiary mb-3">
+			<div class="overflow-auto text-nowrap item-max-height rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="mazeDataTable">
+					</tbody>
+				</table>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="decompose">
-				<div class="card-title">物品解析数据</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="decomposeDataTable">
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<h3 id="decompose">🔎 物品解析数据</h3>
+		<div class="card bg-body-tertiary mb-3">
+			<div class="overflow-auto text-nowrap item-max-height rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="decomposeDataTable">
+					</tbody>
+				</table>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="shop">
-				<div class="card-title">商店出售数据</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="shopDataTable">
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<h3 id="shop">🛒 商店出售数据</h3>
+		<div class="card bg-body-tertiary mb-3">
+			<div class="overflow-auto text-nowrap item-max-height rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="shopDataTable">
+					</tbody>
+				</table>
 			</div>
-			<div class="p-2 card bg-body-tertiary mb-3" id="room">
-				<div class="card-title">房间数据</div>
-				<div class="overflow-auto text-nowrap item-max-height">
-					<table class="table m-0 text-center">
-						<tbody id="roomDataTable">
-						</tbody>
-					</table>
-				</div>
+		</div>
+		<h3 id="room">🏠 房间数据</h3>
+		<div class="card bg-body-tertiary mb-3">
+			<div class="overflow-auto text-nowrap item-max-height rounded">
+				<table class="table  table-striped table-hover m-0 text-center">
+					<tbody id="roomDataTable">
+					</tbody>
+				</table>
 			</div>
+		</div>
 		</div>
 	</body>
 </html>
